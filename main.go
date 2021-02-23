@@ -24,14 +24,14 @@ func main() {
 			"message": "pong",
 		})
 	})
-
+	port := os.Getenv("PORT")
 	srv := &http.Server{
-		Addr:    viper.GetString("port"),
+		Addr:    port,
 		Handler: r,
 	}
 
 	go func() {
-		log.Println("Starting server at", viper.GetString("port"))
+		log.Println("Starting server at", port)
 		if err := srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {
 			log.Fatalf("listen: %s\n", err)
 		}
